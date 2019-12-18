@@ -17,6 +17,7 @@ class Node(object):
 
         for i, item in enumerate(self.keys):
             if key == item:
+                print("Clave repetida, actualizando valor")
                 self.values[i].append(value)
                 break
 

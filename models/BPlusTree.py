@@ -2,7 +2,8 @@ from models.Node import Node
 
 class BPlusTree(object):
 
-    def __init__(self, order=8):
+    # Inicializamos, por defecto en orden 4
+    def __init__(self, order=4):
         self.root = Node(order)
 
     def _find(self, node, key):
@@ -13,7 +14,7 @@ class BPlusTree(object):
 
         return node.values[i + 1], i + 1
 
-    def _merge(self, parent, child, index):
+    def _balance(self, parent, child, index):
       
         parent.values.pop(index)
         pivot = child.keys[0]
@@ -44,9 +45,9 @@ class BPlusTree(object):
             child.split()
 
             if parent and not parent.is_full():
-                self._merge(parent, child, index)
+                self._balance(parent, child, index)
 
-    def retrieve(self, key):
+    def search(self, key):
  
         child = self.root
 
@@ -61,11 +62,11 @@ class BPlusTree(object):
                 return child.values[i]
         
         print("-----------------------")
-        print("\t👇  Recomendado 👇")
-        print("Posicion: ")
-        print("\tLongitud:", key.split("$",1)[0])
-        print("\tLatitud:", key.split("$",1)[1])
-        print("Type: > urgente < ")
+        print("👇  Recomendado 👇")
+        print("🌎  Posicion: ")
+        print("\t\tLongitud:", key.split("$",1)[0])
+        print("\t\tLatitud:", key.split("$",1)[1])
+        print("\t\tType:  🚀 URGENTE ")
         return child.values[0]
         # return None
 
